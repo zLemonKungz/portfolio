@@ -40,7 +40,7 @@ yarn-error.log*
 
 # brainstorming artifacts
 .superpowers/
-docs/brainstorming
+docs/
 
 # IDE
 .vscode/
