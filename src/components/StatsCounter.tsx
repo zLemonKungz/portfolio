@@ -8,22 +8,9 @@ const STATS = [
   { label: "Years Coding", value: 3, suffix: "+" },
 ]
 
-function Counter({ from = 0, to, suffix = "" }: { from?: number; to: number; suffix?: string }) {
+function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
   return (
-    <motion.span
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-    >
-      <motion.span
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="tabular-nums"
-      >
-        {to}{suffix}
-      </motion.span>
-    </motion.span>
+    <span>{to}{suffix}</span>
   )
 }
 
