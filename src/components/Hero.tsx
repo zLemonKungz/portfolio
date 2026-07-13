@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { useState, useRef } from "react"
 import portfolio from "@/config/portfolio"
 import Typewriter from "./Typewriter"
+import ScrambleText from "./ScrambleText"
 import { asset } from "@/lib/utils"
 
 const stagger = (d: number) => ({ delay: d, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const })
@@ -75,7 +76,7 @@ export default function Hero() {
           <span>Currently building cool stuff</span>
         </motion.div>
 
-        {/* Name — gradient animated */}
+        {/* Name — scramble on hover */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -85,7 +86,7 @@ export default function Hero() {
             bg-clip-text text-transparent
             bg-[length:200%_auto] animate-shimmer"
         >
-          ✨ {portfolio.name} ✨
+          ✨ <ScrambleText text={portfolio.name} className="inline" scrambleOn="hover" /> ✨
         </motion.h1>
 
         {/* Title */}
