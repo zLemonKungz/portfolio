@@ -9,10 +9,11 @@ const sourGummy = Sour_Gummy({
   display: "swap",
 });
 
-const siteUrl = process.env.SITE_URL || "https://portfolio-zlemonkungs.vercel.app"
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ""
+const siteUrl = process.env.SITE_URL || "https://zlemonkungz.github.io"
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(siteUrl + basePath),
   title: "Lemon | Developer",
   description:
     "A developer who blends anime aesthetics with clean, maintainable code. ✨ Portfolio with a touch of sakura 🌸",

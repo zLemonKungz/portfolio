@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { useState, useRef } from "react"
 import portfolio from "@/config/portfolio"
 import Typewriter from "./Typewriter"
+import { asset } from "@/lib/utils"
 
 const stagger = (d: number) => ({ delay: d, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const })
 
@@ -52,7 +53,7 @@ export default function Hero() {
           />
           <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden ring-2 ring-sakura/30 group-hover:ring-sakura/60 ring-offset-2 ring-offset-cream shadow-lg transition-all duration-500">
             <img
-              src={portfolio.avatar}
+              src={asset(portfolio.avatar)}
               alt={portfolio.name}
               className="w-full h-full object-cover object-center bg-cream group-hover:scale-105 transition-transform duration-500"
               draggable={false}

@@ -7,6 +7,7 @@ import Reveal from "./Reveal"
 import WordReveal from "./WordReveal"
 import { X, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react"
 import portfolio from "@/config/portfolio"
+import { asset } from "@/lib/utils"
 import type { Project } from "@/lib/types"
 
 const CATEGORIES = [
@@ -133,7 +134,7 @@ export default function Gallery() {
                     <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%)", animation: "shimmerSlide 1.8s ease-in-out infinite" }} />
                   </div>
                 )}
-                <img src={project.image} alt={project.title} className="w-full h-full object-cover" draggable={false} loading={i < 4 ? "eager" : "lazy"} onLoad={() => setLoaded((p) => ({ ...p, [project.id]: true }))} />
+                <img src={asset(project.image)} alt={project.title} className="w-full h-full object-cover" draggable={false} loading={i < 4 ? "eager" : "lazy"} onLoad={() => setLoaded((p) => ({ ...p, [project.id]: true }))} />
 
                 {/* Hover overlay */}
                 <div className={`pointer-events-none absolute inset-0 transition-all duration-400 flex items-end ${hoveredId === project.id ? "opacity-100" : "opacity-0"}`}>
@@ -225,7 +226,7 @@ export default function Gallery() {
                 {/* Image area */}
                 <div className="relative w-full h-[45vh] sm:h-[55vh] bg-gradient-to-br from-sakura-light/10 to-lavender/10">
                   <img
-                    src={lightbox.image}
+                    src={asset(lightbox.image)}
                     alt={lightbox.title}
                     className="w-full h-full object-contain p-3 rounded-2xl"
                     draggable={false}
