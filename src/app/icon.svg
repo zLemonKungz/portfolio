@@ -1,0 +1,21 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="128" cy="128" r="120" fill="url(#bg)"/>
+
+  <!-- Sakura flower petals -->
+  <path d="M128 40 C100 70 95 95 95 95 C95 95 120 90 128 60 C136 90 161 95 161 95 C161 95 156 70 128 40Z" fill="white" opacity="0.95"/>
+  <path d="M128 216 C100 186 95 161 95 161 C95 161 120 166 128 196 C136 166 161 161 161 161 C161 161 156 186 128 216Z" fill="white" opacity="0.95"/>
+  <path d="M40 128 C70 100 95 95 95 95 C95 95 90 120 60 128 C90 136 95 161 95 161 C95 161 70 156 40 128Z" fill="white" opacity="0.95"/>
+  <path d="M216 128 C186 100 161 95 161 95 C161 95 166 120 196 128 C166 136 161 161 161 161 C161 161 186 156 216 128Z" fill="white" opacity="0.95"/>
+  <path d="M84 84 C110 60 128 78 128 78 C128 78 146 60 172 84 C148 110 128 110 128 110 C128 110 108 110 84 84Z" fill="white" opacity="0.95"/>
+
+  <!-- Center circle -->
+  <circle cx="128" cy="128" r="18" fill="#FF8FA3"/>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="256" y2="256">
+      <stop offset="0%" stop-color="#FFB7C5"/>
+      <stop offset="100%" stop-color="#D4B5E8"/>
+    </linearGradient>
+  </defs>
+</svg>

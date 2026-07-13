@@ -21,6 +21,8 @@
 /build
 
 # misc
+AGENTS.md
+CLAUDE.md
 .DS_Store
 *.pem
 
@@ -35,6 +37,18 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# brainstorming artifacts
+.superpowers/
+docs/brainstorming
+
+# IDE
+.vscode/
+.idea/
+
+# temp
+*.tmp
+*.temp
 
 # typescript
 *.tsbuildinfo
