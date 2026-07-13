@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion, useScroll, useSpring } from "framer-motion"
+import { motion } from "framer-motion"
 
 const SECTIONS = [
   { id: "hero",    label: "Home",     num: "01" },
@@ -13,8 +13,6 @@ const SECTIONS = [
 export default function SectionCounter() {
   const [active, setActive] = useState(0)
   const [show, setShow] = useState(false)
-  const { scrollY } = useScroll()
-  const progress = useSpring(scrollY, { stiffness: 80, damping: 25 })
 
   useEffect(() => {
     const onScroll = () => {

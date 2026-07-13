@@ -1,9 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
-
-interface Particle { id: number; left: number; delay: number; duration: number; size: number; opacity: number; type: "petal" | "drift"; emoji: string }
 
 export default function BackgroundEffects() {
   const [particles, setParticles] = useState<Particle[]>([])
@@ -17,32 +14,24 @@ export default function BackgroundEffects() {
 
   useEffect(() => {
     const arr: Particle[] = []
-    for (let i = 0; i < 8; i++) arr.push({ id: i, left: Math.random() * 100, delay: Math.random() * 18, duration: 14 + Math.random() * 18, size: 14 + Math.random() * 14, opacity: 0.2 + Math.random() * 0.25, type: "petal", emoji: "🌸" })
-    for (let i = 0; i < 4; i++) arr.push({ id: 100 + i, left: Math.random() * 100, delay: Math.random() * 20, duration: 20 + Math.random() * 15, size: 10 + Math.random() * 8, opacity: 0.15 + Math.random() * 0.15, type: "drift", emoji: "🌸" })
+    for (let i = 0; i < 8; i++) arr.push({ id: i, left: Math.random() * 100, delay: Math.random() * 18, duration: 14 + Math.random() * 18, size: 14 + Math.random() * 14, opacity: 0.2 + Math.random() * 0.25, type: "petal" as const, emoji: "🌸" })
+    for (let i = 0; i < 4; i++) arr.push({ id: 100 + i, left: Math.random() * 100, delay: Math.random() * 20, duration: 20 + Math.random() * 15, size: 10 + Math.random() * 8, opacity: 0.15 + Math.random() * 0.15, type: "drift" as const, emoji: "🌸" })
     setParticles(arr)
   }, [])
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      {/* Soft subtle background */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: "linear-gradient(180deg, #FFF5F5 0%, #FFF0F2 50%, #FFECF0 100%)",
-        }}
-      />
+      {/* Fixed gradient background */}
+      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #FFF5F5 0%, #FFF0F2 50%, #FFECF0 100%)" }} />
 
-      {/* Mouse spotlight */}
-      <motion.div
-        className="absolute w-[700px] h-[700px] rounded-full bg-sakura/4 blur-3xl"
-        animate={{ left: `calc(${mouse.x * 100}% - 350px)`, top: `calc(${mouse.y * 100}% - 350px)` }}
-        transition={{ duration: 0.3, ease: "linear" }}
-      />
-
-      {/* Animated mesh gradient blobs — ขยับเป็นคลื่น */}
+      {/* Animated mesh gradient blobs */}
       <div className="absolute top-[20%] left-[15%] w-[600px] h-[600px] rounded-full bg-gradient-to-br from-sakura/20 to-lavender/10 blur-2xl animate-blob1" />
       <div className="absolute top-[60%] right-[10%] w-[500px] h-[500px] rounded-full bg-gradient-to-br from-lavender/20 to-sky/10 blur-2xl animate-blob2" />
       <div className="absolute top-[35%] left-[45%] w-[450px] h-[450px] rounded-full bg-gradient-to-br from-sky/15 to-sakura/10 blur-2xl animate-blob3" />
+
+      {/* Radial glows */}
+      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-sakura/5 blur-3xl" />
+      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-lavender/5 blur-3xl" />
 
       {/* Petals */}
       {particles.map((p) => (
@@ -62,6 +51,8 @@ export default function BackgroundEffects() {
     </div>
   )
 }
+
+interface Particle { id: number; left: number; delay: number; duration: number; size: number; opacity: number; type: "petal" | "drift"; emoji: string }
 
 const SPARKLE_CHARS = ["✦", "✧", "⋆", "✶", "⁕"]
 function seededChar(seed: string): string {
