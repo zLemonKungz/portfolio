@@ -149,13 +149,8 @@ export default function BackgroundEffects() {
         </>
       )}
 
-      {/* Mesh blobs */}
-      <div className="absolute top-[20%] left-[15%] w-[600px] h-[600px] rounded-full bg-gradient-to-br from-sakura/20 to-lavender/10 blur-2xl animate-blob1" />
-      <div className="absolute top-[60%] right-[10%] w-[500px] h-[500px] rounded-full bg-gradient-to-br from-lavender/20 to-sky/10 blur-2xl animate-blob2" />
-      <div className="absolute top-[35%] left-[45%] w-[450px] h-[450px] rounded-full bg-gradient-to-br from-sky/15 to-sakura/10 blur-2xl animate-blob3" />
-
-      {/* Radial glows */}
-      <div className="absolute top-1/4 left-1/3 w-[600px] h-[600px] rounded-full bg-sakura/5 blur-3xl" />
+      {/* Soft radial glow */}
+      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-sakura/5 blur-3xl" />
       <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-lavender/5 blur-3xl" />
 
       {/* Mouse spotlight */}

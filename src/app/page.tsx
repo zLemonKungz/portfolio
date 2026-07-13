@@ -21,18 +21,8 @@ export default function Home() {
       <BackToTop />
       <main className="relative z-10">
         <Hero />
-        <div className="relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cream to-cream pointer-events-none" />
-          <div className="relative z-10">
-            <About />
-          </div>
-        </div>
-        <div className="relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-cream via-sakura-light/10 to-cream pointer-events-none" />
-          <div className="relative z-10">
-            <Gallery />
-          </div>
-        </div>
+        <About />
+        <Gallery />
         <Contact />
       </main>
     </LoadingGate>
