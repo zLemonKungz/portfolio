@@ -10,7 +10,7 @@ const sourGummy = Sour_Gummy({
 });
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ""
-const siteUrl = process.env.SITE_URL || "https://zlemonkungz.github.io"
+const siteUrl = process.env.SITE_URL || (basePath ? `https://zlemonkungz.github.io${basePath}` : "https://zlemonkungz.github.io")
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl + basePath),

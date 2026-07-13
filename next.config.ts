@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
-const basePath = process.env.NODE_ENV === "production" ? "/portfolio" : "";
+// GitHub Pages auto-detection
+const isActions = !!process.env.GITHUB_ACTIONS
+const repoName = process.env.GITHUB_REPOSITORY?.split("/")[1] || ""
+const basePath = isActions ? `/${repoName}` : ""
 
 const nextConfig: NextConfig = {
   basePath,
