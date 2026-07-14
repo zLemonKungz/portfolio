@@ -117,8 +117,13 @@ export default function Gallery() {
         <motion.div layout className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 auto-rows-[130px] sm:auto-rows-[150px]">
           <AnimatePresence mode="popLayout">
             {visible.map((project, i) => (
-              <button
+              <motion.button
                 key={project.id}
+                layout
+                initial={{ opacity: 0, scale: 0.85, filter: "blur(4px)" }}
+                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                exit={{ opacity: 0, scale: 0.85, filter: "blur(4px)" }}
+                transition={{ duration: 0.35, delay: i * 0.035, ease: [0.25, 0.46, 0.45, 0.94] }}
                 onClick={() => openLightbox(project, i)}
                 onMouseEnter={() => setHoveredId(project.id)}
                 onMouseLeave={() => setHoveredId(null)}
@@ -163,7 +168,7 @@ export default function Gallery() {
                     </span>
                   </div>
                 )}
-              </button>
+              </motion.button>
             ))}
           </AnimatePresence>
         </motion.div>
@@ -182,7 +187,11 @@ export default function Gallery() {
             >
               <span className="absolute inset-0 rounded-full border border-dashed border-sakura/25 group-hover:border-sakura/50 transition-colors duration-300" />
               <span className="relative z-10 flex items-center gap-2">
-                <span>+</span>
+                <motion.span
+                  animate={{ rotate: [0, 360] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                  className="inline-block"
+                >+</motion.span>
                 <span>Load More</span>
               </span>
             </button>
@@ -224,7 +233,7 @@ export default function Gallery() {
               {/* Image card */}
               <div className="bg-white lightbox-card rounded-2xl overflow-hidden shadow-xl shadow-black/5 border border-white/60">
                 {/* Image area */}
-                <div className="relative w-full h-[45vh] sm:h-[55vh] bg-gradient-to-br from-sakura-light/10 to-lavender/10">
+                <div className="relative w-full h-[45vh] sm:h-[55vh] bg-gradient-to-br from-sakura-light/10 to-lavender/10 group">
                   <img
                     src={asset(lightbox.image)}
                     alt={lightbox.title}

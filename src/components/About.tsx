@@ -49,7 +49,7 @@ export default function About() {
           <div className="relative glass-strong rounded-2xl p-7 sm:p-9 overflow-hidden">
             <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-sakura/5 blur-2xl" />
             <div className="absolute -bottom-20 -left-20 w-40 h-40 rounded-full bg-lavender/5 blur-2xl" />
-            <p className="relative text-dark/75 text-base sm:text-lg leading-relaxed whitespace-pre-line font-[450]">
+            <p className="relative text-dark/75 text-base sm:text-lg leading-relaxed whitespace-pre-line font-normal">
               &ldquo;{portfolio.about}&rdquo;
             </p>
           </div>

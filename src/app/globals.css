@@ -88,14 +88,25 @@ body {
   50% { box-shadow: 0 0 35px rgba(255,183,197,0.35), 0 0 70px rgba(255,183,197,0.15); }
 }
 
-.animate-fall     { animation: fall linear infinite; }
-.animate-drifts   { animation: drifts linear infinite; }
-.animate-twinkle  { animation: twinkle 2s ease-in-out infinite; }
-.animate-sparkle  { animation: sparkle 2.5s ease-in-out infinite; }
-.animate-float    { animation: float 4s ease-in-out infinite; }
-.animate-gradient { background-size: 200% 200%; animation: gradient-shift 14s ease infinite; }
-.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
-.animate-ring-spin  { animation: ring-spin 8s linear infinite; }
+@keyframes shimmerSlide {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+@keyframes text-shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+.animate-fall        { animation: fall linear infinite; }
+.animate-drifts      { animation: drifts linear infinite; }
+.animate-twinkle     { animation: twinkle 2s ease-in-out infinite; }
+.animate-sparkle     { animation: sparkle 2.5s ease-in-out infinite; }
+.animate-float       { animation: float 4s ease-in-out infinite; }
+.animate-gradient    { background-size: 200% 200%; animation: gradient-shift 14s ease infinite; }
+.animate-pulse-glow  { animation: pulse-glow 3s ease-in-out infinite; }
+.animate-ring-spin   { animation: ring-spin 8s linear infinite; }
+.animate-shimmer        { animation: shimmerSlide 1.8s ease-in-out infinite; }
+.animate-text-shimmer   { background-size: 200% auto; animation: text-shimmer 3s ease-in-out infinite; }
 
 .glass {
   background: rgba(255,255,255,0.2);
@@ -125,6 +136,7 @@ body {
 /* ─── Night mode ─── */
 [data-theme="night"] {
   color: #E8DEE8;
+  background: #0A0720;
 }
 [data-theme="night"] .glass {
   background: rgba(12, 8, 30, 0.55);

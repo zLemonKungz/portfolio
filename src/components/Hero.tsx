@@ -84,7 +84,7 @@ export default function Hero() {
           className="font-heading text-3xl sm:text-4xl font-bold tracking-tight
             bg-gradient-to-r from-sakura-deep via-lavender to-sky
             bg-clip-text text-transparent
-            bg-[length:200%_auto] animate-shimmer"
+            animate-text-shimmer"
         >
           ✨ <ScrambleText text={portfolio.name} className="inline" scrambleOn="hover" /> ✨
         </motion.h1>
@@ -129,10 +129,21 @@ export default function Hero() {
           </motion.button>
         </motion.div>
 
-        {/* Scroll */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }} className="mt-8 text-muted/40 text-xs tracking-widest uppercase flex flex-col items-center gap-1">
-          <motion.span className="block text-base" animate={{ y: [0, 6, 0], opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>⬇</motion.span>
-          <span className="tracking-[0.2em]">Scroll</span>
+        {/* Scroll — animated mouse cue */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          className="mt-10 text-muted/40 text-[10px] tracking-[0.25em] uppercase flex flex-col items-center gap-2"
+        >
+          <div className="w-5 h-8 rounded-full border border-muted/30 flex items-start justify-center pt-1.5">
+            <motion.div
+              className="w-1 h-1.5 rounded-full bg-gradient-to-b from-sakura/60 to-lavender/60"
+              animate={{ y: [0, 10, 0], opacity: [0.6, 0.2, 0.6] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </div>
+          <span>Scroll</span>
         </motion.div>
       </motion.div>
     </section>

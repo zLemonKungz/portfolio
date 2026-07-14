@@ -18,8 +18,12 @@ export default function Home() {
   const [time, setTime] = useState<TimeOfDay | null>(null)
 
   useEffect(() => {
-    const t = time ?? (new Date().getHours() >= 6 && new Date().getHours() < 18 ? "day" : "night")
-    document.documentElement.dataset.theme = t
+    if (time) {
+      document.documentElement.dataset.theme = time
+    } else {
+      const h = new Date().getHours()
+      document.documentElement.dataset.theme = (h >= 6 && h < 18) ? "day" : "night"
+    }
   }, [time])
 
   return (

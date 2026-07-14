@@ -74,7 +74,12 @@ export default function ScrambleText({
       className={className}
       onMouseEnter={scrambleOn === "hover" ? handleInteraction : undefined}
       onTouchStart={scrambleOn === "hover" ? handleInteraction : undefined}
-      style={{ cursor: scrambleOn === "hover" ? "pointer" : undefined }}
+      style={{
+        cursor: scrambleOn === "hover" ? "pointer" : undefined,
+        display: "inline-block",
+        minWidth: `${text.length}ch`,
+        textAlign: "center",
+      }}
     >
       {display}
     </Tag>

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
+import { motion, useScroll, useSpring, useTransform } from "framer-motion"
 
 const SECTIONS = [
   { id: "hero",    label: "Home",     num: "01" },
@@ -13,6 +13,10 @@ const SECTIONS = [
 export default function SectionCounter() {
   const [active, setActive] = useState(0)
   const [show, setShow] = useState(false)
+  const { scrollYProgress } = useScroll()
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 80, damping: 25 })
+  const progressPercent = useTransform(smoothProgress, [0, 1], [0, 100])
+  const barHeight = useTransform(progressPercent, (v) => `${v}%`)
 
   useEffect(() => {
     const onScroll = () => {
@@ -79,8 +83,13 @@ export default function SectionCounter() {
           </button>
         ))}
 
-        {/* Vertical connector line */}
-        <div className="absolute top-3 bottom-3 right-[11px] w-px bg-gradient-to-b from-sakura/15 via-lavender/15 to-sky/15 -z-10" />
+        {/* Vertical connector line — progress tracking */}
+        <div className="absolute top-3 bottom-3 right-[11px] w-px bg-muted/10 -z-10 overflow-hidden rounded-full">
+          <motion.div
+            className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-sky via-lavender to-sakura rounded-full"
+            style={{ height: barHeight }}
+          />
+        </div>
       </div>
     </motion.div>
   )

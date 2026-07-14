@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 
 const NAV_ITEMS = [
@@ -13,11 +13,23 @@ const NAV_ITEMS = [
 export default function Navbar() {
   const [active, setActive] = useState("hero")
   const [scrolled, setScrolled] = useState(false)
+  const [hidden, setHidden] = useState(false)
+  const lastScrollY = useRef(0)
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 80)
-      const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 60
+      const sy = window.scrollY
+      setScrolled(sy > 80)
+
+      // Hide on scroll down, show on scroll up (only after threshold)
+      if (sy > 150) {
+        setHidden(sy > lastScrollY.current)
+      } else {
+        setHidden(false)
+      }
+      lastScrollY.current = sy
+
+      const nearBottom = window.innerHeight + sy >= document.documentElement.scrollHeight - 60
       const sections = NAV_ITEMS.map((i) => document.getElementById(i.id))
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = sections[i]
@@ -40,8 +52,8 @@ export default function Navbar() {
   return (
     <motion.nav
       initial={{ y: -30, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+      animate={{ y: hidden ? -80 : 0, opacity: hidden ? 0 : 1 }}
+      transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
       className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 w-auto"
     >
       {/* The pill container */}

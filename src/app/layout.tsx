@@ -62,8 +62,14 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${sourGummy.variable} scroll-smooth`}
+      suppressHydrationWarning
     >
-      <body className="min-h-screen antialiased">{children}</body>
+      <body className="min-h-screen antialiased">
+        <script dangerouslySetInnerHTML={{
+          __html: `document.documentElement.dataset.theme=(new Date().getHours()>=6&&new Date().getHours()<18)?"day":"night"`,
+        }} />
+        {children}
+      </body>
     </html>
   );
 }

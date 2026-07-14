@@ -1,5 +1,7 @@
 "use client"
 
+import { motion, AnimatePresence } from "framer-motion"
+
 type TimeOfDay = "day" | "night"
 
 const TIMES: TimeOfDay[] = ["day", "night"]
@@ -42,7 +44,19 @@ export default function TimeToggle({ time, onChange }: Props) {
       }}
       title="Click to cycle time — Double-click for auto"
     >
-      <span className="text-base">{info.icon}</span>
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={current}
+          initial={{ rotateY: -90, opacity: 0 }}
+          animate={{ rotateY: 0, opacity: 1 }}
+          exit={{ rotateY: 90, opacity: 0 }}
+          transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="text-base inline-block"
+          style={{ transformStyle: "preserve-3d" }}
+        >
+          {info.icon}
+        </motion.span>
+      </AnimatePresence>
       <span className="font-medium">{info.label}</span>
       {time === null && <span className="text-[10px] px-1 py-0.5 rounded-full bg-white/20">auto</span>}
     </button>

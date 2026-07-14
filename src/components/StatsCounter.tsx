@@ -1,6 +1,7 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useMotionValue, useSpring, useTransform, useInView } from "framer-motion"
+import { useRef, useEffect, useState } from "react"
 
 const STATS = [
   { label: "Projects", value: 8, suffix: "+" },
@@ -9,9 +10,25 @@ const STATS = [
 ]
 
 function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
-  return (
-    <span>{to}{suffix}</span>
-  )
+  const ref = useRef<HTMLSpanElement>(null)
+  const inView = useInView(ref, { once: true, margin: "-40px" })
+  const motionVal = useMotionValue(0)
+  const springVal = useSpring(motionVal, { stiffness: 80, damping: 20 })
+  const rounded = useTransform(springVal, (v) => Math.floor(v))
+  const [display, setDisplay] = useState("0")
+
+  useEffect(() => {
+    if (inView) {
+      motionVal.set(to)
+    }
+  }, [inView, to, motionVal])
+
+  useEffect(() => {
+    const unsubscribe = rounded.on("change", (v) => setDisplay(String(v)))
+    return unsubscribe
+  }, [rounded])
+
+  return <span ref={ref}>{display}{suffix}</span>
 }
 
 export default function StatsCounter() {

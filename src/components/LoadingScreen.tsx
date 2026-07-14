@@ -56,14 +56,6 @@ export default function LoadingScreen() {
           80% { opacity: 0.2; }
           100% { transform: translateY(110vh) rotate(720deg) translateX(80px); opacity: 0; }
         }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0; transform: scale(0.5); }
-          50% { opacity: 0.4; transform: scale(1.2); }
-        }
-        @keyframes shimmerSlide {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
       `}</style>
 
       {/* Skeleton content */}
