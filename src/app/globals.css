@@ -167,3 +167,9 @@ body {
 [data-theme="night"] .shadow-lg { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); }
 [data-theme="night"] .shadow-xl { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); }
 [data-theme="night"] .shadow-md { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35); }
+
+/* Lightbox stays white in night mode */
+[data-theme="night"] .lightbox-card { background: #ffffff !important; }
+[data-theme="night"] .lightbox-card .text-dark { color: #2D1B2E; }
+[data-theme="night"] .lightbox-card [class*="text-dark/"] { color: rgba(45, 27, 46, 0.6); }
+[data-theme="night"] .lightbox-card .text-muted\/60 { color: rgba(124, 92, 122, 0.6); }

@@ -222,7 +222,7 @@ export default function Gallery() {
               onClick={(e) => e.stopPropagation()}
             >
               {/* Image card */}
-              <div className="bg-white rounded-2xl overflow-hidden shadow-xl shadow-black/5 border border-white/60">
+              <div className="bg-white lightbox-card rounded-2xl overflow-hidden shadow-xl shadow-black/5 border border-white/60">
                 {/* Image area */}
                 <div className="relative w-full h-[45vh] sm:h-[55vh] bg-gradient-to-br from-sakura-light/10 to-lavender/10">
                   <img
@@ -243,17 +243,17 @@ export default function Gallery() {
 
                   {/* Nav buttons — on image edges */}
                   <button onClick={() => navigateLightbox(-1)}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-dark/60 hover:text-dark hover:bg-white shadow-sm transition-all border border-white/60">
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/70 hover:bg-white/90 backdrop-blur-md flex items-center justify-center text-muted/70 hover:text-dark shadow-sm transition-all border border-white/60">
                     <ChevronLeft size={20} />
                   </button>
                   <button onClick={() => navigateLightbox(1)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-dark/60 hover:text-dark hover:bg-white shadow-sm transition-all border border-white/60">
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/70 hover:bg-white/90 backdrop-blur-md flex items-center justify-center text-muted/70 hover:text-dark shadow-sm transition-all border border-white/60">
                     <ChevronRight size={20} />
                   </button>
                 </div>
 
                 {/* Info bar */}
-                <div className="px-5 py-4 sm:px-6 sm:py-5 bg-white border-t border-sakura-light/20">
+                <div className="px-5 py-4 sm:px-6 sm:py-5 bg-white lightbox-card border-t border-sakura-light/20">
                   <div className="flex items-start justify-between gap-4">
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2.5 flex-wrap">
