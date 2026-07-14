@@ -65,7 +65,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
-          className="inline-flex items-center gap-2 bg-white/50 backdrop-blur-md text-sakura-deep text-xs font-semibold px-5 py-1.5 rounded-full mb-6 tracking-wider border border-sakura/10 shadow-sm"
+          className="inline-flex items-center gap-2 bg-gradient-to-r from-sakura/20 to-lavender/20 text-sakura-deep text-xs font-semibold px-5 py-1.5 rounded-full mb-10 tracking-wider border border-sakura/10"
         >
           <span className="text-sm">✨</span>
           <WordReveal text="Get in Touch" />
