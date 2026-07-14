@@ -58,8 +58,6 @@ const ICON_MAP: Record<string, React.ReactNode> = {
 export default function Contact() {
   return (
     <section id="contact" className="relative z-10 px-4 pt-12 sm:pt-16 pb-0">
-      {/* Bottom fade out */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none bg-gradient-to-t from-cream to-transparent" />
 
       <div className="max-w-3xl mx-auto text-center relative z-10">
         {/* Section tag */}

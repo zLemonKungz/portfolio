@@ -3,26 +3,16 @@
 import { useEffect, useState, useCallback } from "react"
 
 // ─── Time Palette ───
-type TimeOfDay = "dawn" | "day" | "sunset" | "night"
+export type TimeOfDay = "day" | "night"
 
 const PALETTES: Record<TimeOfDay, { bg: string; label: string; icon: string }> = {
-  dawn: {
-    bg: "linear-gradient(180deg, #2D1B2E 0%, #6B3A5A 25%, #FF8FA3 50%, #FFD1DC 70%, #FFF5F5 100%)",
-    label: "Dawn",
-    icon: "🌅",
-  },
   day: {
-    bg: "linear-gradient(180deg, #FFF5F5 0%, #FFE4EC 25%, #FFD1DC 50%, #FFB7C5 75%, #FFCDD9 100%)",
+    bg: "linear-gradient(180deg, #FFF8F9 0%, #FFEEF0 25%, #FFE0E6 50%, #FFD0DA 75%, #FFC8D4 100%)",
     label: "Day",
     icon: "☀️",
   },
-  sunset: {
-    bg: "linear-gradient(180deg, #FFF5F5 0%, #FFCDD9 20%, #FF8FA3 45%, #D4B5E8 70%, #2D1B2E 100%)",
-    label: "Sunset",
-    icon: "🌇",
-  },
   night: {
-    bg: "linear-gradient(180deg, #0A0315 0%, #1A0A2E 30%, #2D1B2E 60%, #4A2040 100%)",
+    bg: "linear-gradient(180deg, #0A0720 0%, #120A2E 33%, #1C1038 66%, #22143C 100%)",
     label: "Night",
     icon: "🌙",
   },
@@ -30,48 +20,34 @@ const PALETTES: Record<TimeOfDay, { bg: string; label: string; icon: string }> =
 
 function getTimeOfDay(): TimeOfDay {
   const h = new Date().getHours()
-  if (h >= 5 && h < 8) return "dawn"
-  if (h >= 8 && h < 17) return "day"
-  if (h >= 17 && h < 20) return "sunset"
-  return "night"
+  return (h >= 6 && h < 18) ? "day" : "night"
 }
 
-const TIMES: TimeOfDay[] = ["dawn", "day", "sunset", "night"]
+const TIMES: TimeOfDay[] = ["day", "night"]
 
 // ─── Particles ───
 interface Particle { id: number; left: number; delay: number; duration: number; size: number; opacity: number; type: "petal" | "drift"; emoji: string }
 
-export default function BackgroundEffects() {
+export default function BackgroundEffects({ timeOverride }: { timeOverride?: TimeOfDay | null }) {
   const [particles, setParticles] = useState<Particle[]>([])
   const [mouse, setMouse] = useState({ x: 0.5, y: 0.5 })
-  const [timeIdx, setTimeIdx] = useState<number | null>(null) // null = auto
   const [currentTime, setCurrentTime] = useState<TimeOfDay>("day")
 
-  // Auto-update time every minute
+  // Use timeOverride if provided, otherwise auto-detect
   useEffect(() => {
-    const update = () => {
-      if (timeIdx === null) setCurrentTime(getTimeOfDay())
-    }
-    update()
+    setCurrentTime(timeOverride ?? getTimeOfDay())
+  }, [timeOverride])
+
+  // Auto-update time every minute (only when no override)
+  useEffect(() => {
+    if (timeOverride) return // skip auto when override is set
+    const update = () => setCurrentTime(getTimeOfDay())
     const interval = setInterval(update, 60000)
     return () => clearInterval(interval)
-  }, [timeIdx])
-
-  // Manual cycle through times
-  const cycleTime = useCallback(() => {
-    const nextIdx = timeIdx === null ? 1 : (timeIdx + 1) % TIMES.length
-    setTimeIdx(nextIdx)
-    setCurrentTime(TIMES[nextIdx])
-  }, [timeIdx])
-
-  // Reset to auto on double click
-  const resetTime = useCallback(() => {
-    setTimeIdx(null)
-    setCurrentTime(getTimeOfDay())
-  }, [])
+  }, [timeOverride])
 
   const palette = PALETTES[currentTime]
-  const isDark = currentTime === "night" || currentTime === "dawn"
+  const isDark = currentTime === "night"
 
   // Mouse tracking
   useEffect(() => {
@@ -89,14 +65,16 @@ export default function BackgroundEffects() {
   }, [])
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      {/* Time-based sky gradient */}
+    <div className="fixed inset-0 z-0 overflow-hidden">
+      {/* Background (pointer-events-none to let clicks pass through) */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Time-based sky gradient */}
       <div
         className="absolute inset-0 transition-all duration-1000 ease-in-out"
         style={{ background: palette.bg }}
       />
 
-      {/* Sun/Moon glow */}
+      {/* Sun glow (day) / Moon glow (night) */}
       {currentTime === "night" ? (
         <div
           className="absolute rounded-full blur-2xl transition-all duration-1000"
@@ -111,13 +89,9 @@ export default function BackgroundEffects() {
         <div
           className="absolute rounded-full blur-3xl transition-all duration-1000"
           style={{
-            width: currentTime === "dawn" ? "350px" : "220px",
-            height: currentTime === "dawn" ? "350px" : "220px",
-            top: currentTime === "sunset" ? "60%" : "12%",
-            right: currentTime === "sunset" ? "50%" : "15%",
-            background: currentTime === "sunset"
-              ? "radial-gradient(circle, #FF8FA3, #FFB7C5, transparent)"
-              : "radial-gradient(circle, #FFE57F, #FFB7C5, transparent)",
+            width: "220px", height: "220px",
+            top: "12%", right: "15%",
+            background: "radial-gradient(circle, #FFE57F, #FFB7C5, transparent)",
             opacity: 0.35,
           }}
         />
@@ -139,14 +113,6 @@ export default function BackgroundEffects() {
             <div key={i} className="absolute rounded-full bg-white animate-twinkle select-none" style={{ top: s.top, left: s.left, width: s.size, height: s.size, animationDelay: `${i * 0.4}s` }} />
           ))}
         </div>
-      )}
-
-      {/* Dawn/Sunset mist */}
-      {(currentTime === "dawn" || currentTime === "sunset") && (
-        <>
-          <div className="absolute top-1/3 left-0 w-[400px] h-[200px] rounded-full bg-white/5 blur-3xl animate-pulse" />
-          <div className="absolute bottom-1/4 right-0 w-[300px] h-[150px] rounded-full bg-sakura/5 blur-3xl animate-pulse" />
-        </>
       )}
 
       {/* Soft radial glow */}
@@ -178,24 +144,7 @@ export default function BackgroundEffects() {
         <SparkleDot top="35%" right="14%" size="md" delay="1.8s" />
         <SparkleDot top="88%" right="20%" size="sm" delay="0.4s" />
       </div>
-
-      {/* Time toggle (bottom-right) */}
-      <div className="absolute bottom-4 right-4 z-50 pointer-events-auto">
-        <button
-          onClick={cycleTime}
-          onDoubleClick={resetTime}
-          className="px-2.5 py-1 rounded-full text-[10px] font-mono tracking-wider backdrop-blur-md border transition-all duration-500 cursor-pointer hover:scale-105"
-          style={{
-            backgroundColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.25)",
-            borderColor: isDark ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.3)",
-            color: isDark ? "rgba(255,255,255,0.35)" : "rgba(124,92,122,0.5)",
-          }}
-          title={`${palette.icon} ${palette.label} — Click to cycle, double-click for auto`}
-        >
-          {palette.icon} {palette.label}
-          {timeIdx === null && <span className="ml-1 opacity-50">auto</span>}
-        </button>
-      </div>
+    </div>
     </div>
   )
 }

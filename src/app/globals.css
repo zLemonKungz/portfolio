@@ -121,3 +121,35 @@ body {
   background: linear-gradient(180deg,#FFB7C5,#D4B5E8);
   border-radius: 999px;
 }
+
+/* ─── Night mode ─── */
+[data-theme="night"] body,
+[data-theme="night"] {
+  color: #E8DEE8;
+}
+[data-theme="night"] .glass {
+  background: rgba(15, 10, 42, 0.5);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+[data-theme="night"] .glass-strong {
+  background: rgba(15, 10, 42, 0.6);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+[data-theme="night"] [class*="text-dark"] {
+  color: #E8DEE8 !important;
+}
+[data-theme="night"] [class*="text-muted"] {
+  color: rgba(200, 180, 210, 0.7) !important;
+}
+[data-theme="night"] [class*="border-white"] {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+[data-theme="night"] [class*="bg-cream"] {
+  background: transparent;
+}
+[data-theme="night"] .section-divider {
+  background: linear-gradient(90deg, transparent, rgba(200, 180, 210, 0.15), rgba(180, 160, 190, 0.15), transparent);
+}
