@@ -93,7 +93,7 @@ export default function Contact() {
               className="flex flex-col items-center gap-2 group"
             >
               <div
-                className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center text-white shadow-md transition-all duration-300 border-2 border-white/50 group-hover:border-white/80 group-hover:shadow-lg"
+                className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center text-white shadow-md transition-all duration-300 border-2 border-white/60 group-hover:border-white/90 group-hover:shadow-lg shadow-black/5"
                 style={{
                   background: `linear-gradient(135deg, ${link.color}, ${link.color}dd)`,
                 }}
