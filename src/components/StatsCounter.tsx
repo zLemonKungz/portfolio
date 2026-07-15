@@ -49,7 +49,7 @@ export default function StatsCounter() {
           transition={{ delay: 0.5 + i * 0.15, type: "spring", stiffness: 200 }}
           className="text-center"
         >
-          <div className="text-2xl sm:text-3xl font-bold font-heading text-sakura-deep">
+          <div className="text-2xl sm:text-3xl font-bold font-heading" style={{ color: "var(--theme-accent-deep)" }}>
             <Counter to={stat.value} suffix={stat.suffix} />
           </div>
           <div className="text-xs text-muted/70 mt-0.5 tracking-wider uppercase">{stat.label}</div>

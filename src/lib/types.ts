@@ -29,6 +29,8 @@ export interface PortfolioConfig {
   projects: Project[]
   social: SocialLink[]
   footer: string
+  malUser?: string
+  lastfmUser?: string
   theme: {
     primary: string
     primaryLight: string

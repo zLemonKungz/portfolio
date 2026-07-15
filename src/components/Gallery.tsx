@@ -75,7 +75,7 @@ export default function Gallery() {
           viewport={{ once: true, margin: "-60px" }}
           className="text-center"
         >
-          <span className="inline-flex items-center gap-2 bg-gradient-to-r from-sakura/20 to-lavender/20 text-sakura-deep text-xs font-semibold px-5 py-1.5 rounded-full mb-8 tracking-wider border border-sakura/10">
+          <span className="inline-flex items-center gap-2 badge-theme text-sakura-deep text-xs font-semibold px-5 py-1.5 rounded-full mb-8 tracking-wider border border-sakura/10">
             <span className="text-sm">✦</span>
             <WordReveal text="My Projects" />
           </span>
@@ -95,13 +95,14 @@ export default function Gallery() {
               className={`relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 overflow-hidden ${
                 activeCat === cat.key
                   ? "text-white shadow-md shadow-sakura/15"
-                  : "text-muted/70 hover:text-dark bg-sakura/5 hover:bg-sakura/15"
+                  : "text-muted/70 hover:text-dark bg-white/20 hover:bg-white/30"
               }`}
             >
               {activeCat === cat.key && (
                 <motion.span
                   layoutId="filterPill"
-                  className="absolute inset-0 bg-gradient-to-r from-sakura to-lavender"
+                  className="absolute inset-0"
+                  style={{ background: "var(--theme-filter-pill)" }}
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}

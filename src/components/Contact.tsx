@@ -41,7 +41,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
-          className="inline-flex items-center gap-2 bg-gradient-to-r from-sakura/20 to-lavender/20 text-sakura-deep text-xs font-semibold px-5 py-1.5 rounded-full mb-10 tracking-wider border border-sakura/10"
+          className="inline-flex items-center gap-2 badge-theme text-sakura-deep text-xs font-semibold px-5 py-1.5 rounded-full mb-10 tracking-wider border border-sakura/10"
         >
           <span className="text-sm">✨</span>
           <WordReveal text="Get in Touch" />
@@ -93,38 +93,117 @@ export default function Contact() {
           ))}
         </motion.div>
 
-        {/* Footer */}
+        {/* Footer — framed */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          className="pb-12 pt-4"
+          transition={{ delay: 0.4, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="pb-12 pt-8 flex justify-center"
         >
-          {/* ✿ */}
-          <motion.p
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5, type: "spring", stiffness: 150 }}
-            className="text-sakura-deep/20 text-lg mb-1"
-            aria-hidden="true"
-          >
-            ✿
-          </motion.p>
+          {/* Decorative frame */}
+          <div className="relative max-w-xs sm:max-w-sm w-full mx-auto">
+            {/* Corner decorations — theme-aware */}
+            <motion.span
+              className="absolute -top-4 -left-4 text-muted/30 text-xl"
+              animate={{ rotate: [0, 15, 0, -15, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              aria-hidden="true"
+            >
+              ✿
+            </motion.span>
+            <motion.span
+              className="absolute -top-4 -right-4 text-muted/30 text-xl"
+              animate={{ rotate: [0, -15, 0, 15, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              aria-hidden="true"
+            >
+              ✤
+            </motion.span>
+            <motion.span
+              className="absolute -bottom-4 -left-4 text-muted/30 text-xl"
+              animate={{ rotate: [0, -15, 0, 15, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              aria-hidden="true"
+            >
+              ✤
+            </motion.span>
+            <motion.span
+              className="absolute -bottom-4 -right-4 text-muted/30 text-xl"
+              animate={{ rotate: [0, 15, 0, -15, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+              aria-hidden="true"
+            >
+              ✿
+            </motion.span>
 
-          {/* 🌸 */}
-          <p className="text-2xl mb-3 opacity-40" aria-hidden="true">🌸</p>
+            {/* Frame border — glass-strong auto-adapts to night mode */}
+            <div className="px-5 sm:px-8 py-4 sm:py-5 rounded-2xl border border-white/30 glass-strong">
+              {/* Floating sakura */}
+              <motion.div
+                className="text-lg mb-1"
+                aria-hidden="true"
+                animate={{ y: [0, -5, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              >
+                🌸
+              </motion.div>
 
-          {/* ✦ © 2026 Lemon ✦ — gradient */}
-          <p className="font-heading text-sm sm:text-base font-bold bg-gradient-to-r from-sakura-deep/70 via-lavender/60 to-sky/60 bg-clip-text text-transparent tracking-wide">
-            ✦ &copy; {new Date().getFullYear()} {portfolio.name} ✦
-          </p>
+              {/* ✦ © 2026 Lemon ✦ — fade in, no spring (was causing flicker) */}
+              <motion.p
+                className="font-heading text-sm sm:text-base font-bold tracking-wide"
+                initial={{ opacity: 0, y: 5 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.6, duration: 0.5, ease: "easeOut" }}
+              >
+                <span className="bg-gradient-to-r from-sakura-deep via-lavender to-sky bg-clip-text text-transparent whitespace-nowrap">
+                  <motion.span
+                    className="inline-block"
+                    animate={{ rotate: [0, 6, 0, -6, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    ✦
+                  </motion.span>{" "}
+                  <span>
+                    &copy; {new Date().getFullYear()} {portfolio.name}
+                  </span>{" "}
+                  <motion.span
+                    className="inline-block"
+                    animate={{ rotate: [0, -6, 0, 6, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+                  >
+                    ✦
+                  </motion.span>
+                </span>
+              </motion.p>
 
-          {/* Made with ... */}
-          <p className="text-muted/40 text-xs sm:text-sm mt-2 tracking-wide">
-            {portfolio.footer}
-          </p>
+              {/* Made with ... — faster cascade (0.04s instead of 0.08s) */}
+              <motion.p
+                className="text-muted/40 text-xs sm:text-sm mt-2 tracking-wide"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.7, duration: 0.3 }}
+              >
+                {portfolio.footer.split("").map((char, i) => (
+                  <motion.span
+                    key={i}
+                    className="inline-block"
+                    animate={{ y: [0, -2, 0] }}
+                    transition={{
+                      duration: 1.2,
+                      repeat: Infinity,
+                      delay: i * 0.04,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    {char === " " ? " " : char}
+                  </motion.span>
+                ))}
+              </motion.p>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

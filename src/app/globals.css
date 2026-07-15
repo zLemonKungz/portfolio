@@ -21,7 +21,7 @@ body {
   font-family: var(--font-body);
   font-weight: 800;
   font-size: 1.1rem;
-  background: #FFF5F5;
+  background: #FFC8D4;
   color: #2D1B2E;
   overflow-x: hidden;
 }
@@ -108,6 +108,8 @@ body {
 .animate-shimmer        { animation: shimmerSlide 1.8s ease-in-out infinite; }
 .animate-text-shimmer   { background-size: 200% auto; animation: text-shimmer 3s ease-in-out infinite; }
 
+.badge-theme { background: var(--theme-badge-bg); }
+
 .glass {
   background: rgba(255,255,255,0.2);
   backdrop-filter: blur(20px);
@@ -133,10 +135,32 @@ body {
   border-radius: 999px;
 }
 
-/* ─── Night mode ─── */
+/* ─── Theme CSS variables ─── */
+:root {
+  --theme-accent: #FFB7C5;
+  --theme-accent-deep: #FF8FA3;
+  --theme-accent-alt: #D4B5E8;
+  --theme-accent-sky: #B5D8EB;
+  --theme-filter-pill: linear-gradient(to right, #FFB7C5, #D4B5E8);
+  --theme-badge-bg: linear-gradient(to right, rgba(255,183,197,0.2), rgba(212,181,232,0.2));
+  --theme-skill-bg: linear-gradient(to right, rgba(255,183,197,0.15), rgba(212,181,232,0.15));
+}
 [data-theme="night"] {
   color: #E8DEE8;
   background: #0A0720;
+  --theme-accent: #6B5B95;
+  --theme-accent-deep: #8870A8;
+  --theme-accent-alt: #4A85A8;
+  --theme-accent-sky: #3A6A80;
+  --theme-filter-pill: linear-gradient(to right, #6B5B95, #4A85A8);
+  --theme-badge-bg: linear-gradient(to right, rgba(107,91,149,0.3), rgba(74,133,168,0.3));
+  --theme-skill-bg: linear-gradient(to right, rgba(107,91,149,0.2), rgba(74,133,168,0.2));
+}
+[data-theme="night"] body {
+  background: #22143C;
+}
+[data-theme="day"] body {
+  background: #FFC8D4;
 }
 [data-theme="night"] .glass {
   background: rgba(12, 8, 30, 0.55);

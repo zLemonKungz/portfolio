@@ -10,8 +10,11 @@ import Contact from "@/components/Contact"
 import ProgressBar from "@/components/ProgressBar"
 import SectionCounter from "@/components/SectionCounter"
 import CustomCursor from "@/components/CustomCursor"
+import NowPlaying from "@/components/NowPlaying"
 import BackToTop from "@/components/BackToTop"
 import TimeToggle from "@/components/TimeToggle"
+import CurrentWatching from "@/components/CurrentWatching"
+import EasterEgg from "@/components/EasterEgg"
 import LoadingGate from "@/components/LoadingGate"
 
 export default function Home() {
@@ -30,14 +33,17 @@ export default function Home() {
     <LoadingGate>
       <ProgressBar />
       <CustomCursor />
+      <NowPlaying />
       <TimeToggle time={time} onChange={setTime} />
       <BackgroundEffects timeOverride={time} />
       <Navbar />
       <SectionCounter />
       <BackToTop />
+      <EasterEgg />
       <main className="relative z-10">
         <Hero />
         <About />
+        <CurrentWatching />
         <Gallery />
         <Contact />
       </main>

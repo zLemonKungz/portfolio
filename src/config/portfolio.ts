@@ -45,7 +45,11 @@ and finding beauty in every bit of data. 💻`,
   ],
 
   // ─── Footer ──────────────────────────────────
-  footer: "Made with zLemonKungz's touch of sakura 🌸",
+  footer: "Made with zLemonKungz's touch of sakura",
+
+  // ─── Integrations ────────────────────────────
+  malUser: "zLemonKungz",
+  lastfmUser: "zLemonKungz",
 
   // ─── Theme ───────────────────────────────────
   theme: {

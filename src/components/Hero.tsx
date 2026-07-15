@@ -1,7 +1,7 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { useState, useRef } from "react"
+import { motion, useScroll, useTransform, useSpring } from "framer-motion"
+import { useState, useRef, useEffect } from "react"
 import portfolio from "@/config/portfolio"
 import Typewriter from "./Typewriter"
 import ScrambleText from "./ScrambleText"
@@ -12,6 +12,18 @@ const stagger = (d: number) => ({ delay: d, duration: 0.6, ease: [0.25, 0.46, 0.
 export default function Hero() {
   const btnRef = useRef<HTMLButtonElement>(null)
   const [btnPos, setBtnPos] = useState({ x: 0, y: 0 })
+  const [isMobile, setIsMobile] = useState(true)
+
+  // Parallax scroll
+  const { scrollY } = useScroll()
+  const bgY = useTransform(scrollY, [0, 500], [0, 80])
+  const midY = useTransform(scrollY, [0, 500], [0, -40])
+  const smoothBgY = useSpring(bgY, { stiffness: 120, damping: 25 })
+  const smoothMidY = useSpring(midY, { stiffness: 120, damping: 25 })
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768)
+  }, [])
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!btnRef.current) return
@@ -35,12 +47,25 @@ export default function Hero() {
       id="hero"
       className="relative min-h-[80vh] sm:min-h-[85vh] flex flex-col items-center justify-center px-4 pt-20 pb-8 text-center overflow-hidden"
     >
+      {/* Parallax background layer — moves slower */}
+      {!isMobile && (
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          style={{ y: smoothBgY }}
+        />
+      )}
+
+      {/* Parallax wrapper — separate from entrance animation to avoid conflict */}
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
+        style={!isMobile ? { y: smoothMidY } : undefined}
         className="flex flex-col items-center gap-3 max-w-xl relative"
       >
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="flex flex-col items-center gap-3 w-full"
+        >
         {/* Avatar */}
         <motion.div
           className="relative group cursor-pointer"
@@ -146,6 +171,7 @@ export default function Hero() {
           <span>Scroll</span>
         </motion.div>
       </motion.div>
+    </motion.div>
     </section>
   )
 }

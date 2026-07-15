@@ -13,6 +13,7 @@ const nextConfig: NextConfig = {
   },
   env: {
     NEXT_PUBLIC_BASE_PATH: basePath,
+    NEXT_PUBLIC_LASTFM_KEY: process.env.NEXT_PUBLIC_LASTFM_KEY || "",
   },
 };
 

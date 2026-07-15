@@ -67,6 +67,9 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
+        env:
+          SITE_URL: ${{ vars.SITE_URL || '' }}
+          NEXT_PUBLIC_LASTFM_KEY: ${{ vars.NEXT_PUBLIC_LASTFM_KEY || '' }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

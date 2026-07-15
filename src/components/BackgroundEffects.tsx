@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { useScroll, useTransform, useSpring, motion } from "framer-motion"
 
 // ─── Time Palette ───
 export type TimeOfDay = "day" | "night"
@@ -55,6 +56,11 @@ export default function BackgroundEffects({ timeOverride }: { timeOverride?: Tim
   }, [])
 
   // Particles
+  // Parallax for sky gradient
+  const { scrollY } = useScroll()
+  const skyY = useTransform(scrollY, [0, 500], [0, -30])
+  const smoothSkyY = useSpring(skyY, { stiffness: 120, damping: 25 })
+
   useEffect(() => {
     const arr: Particle[] = []
     for (let i = 0; i < 8; i++) {
@@ -71,9 +77,9 @@ export default function BackgroundEffects({ timeOverride }: { timeOverride?: Tim
       {/* Background — lets clicks pass through */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Time-based sky gradient */}
-        <div
+        <motion.div
           className="absolute inset-0 transition-all duration-1000 ease-in-out"
-          style={{ background: palette.bg }}
+          style={{ background: palette.bg, y: smoothSkyY }}
         />
 
         {/* Sun glow (day) / Moon glow (night) */}
