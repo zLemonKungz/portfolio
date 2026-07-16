@@ -21,33 +21,48 @@ export default function EasterEgg() {
   const [petals, setPetals] = useState<Petal[]>([])
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const keyBufRef = useRef<string[]>([])
+  const tapTimestampsRef = useRef<number[]>([])
 
   useEffect(() => {
+    const trigger = () => {
+      setActive(true)
+      const newPetals: Petal[] = Array.from({ length: PETAL_COUNT }, (_, i) => ({
+        id: Date.now() + i,
+        x: Math.random() * 96 + 2,
+        drift: (Math.random() - 0.5) * 15,
+        delay: Math.random() * 0.5,
+        size: 16 + Math.random() * 20,
+        duration: 2.2 + Math.random() * 1.5,
+        emoji: EMOJIS[Math.floor(Math.random() * EMOJIS.length)],
+      }))
+      setPetals(newPetals)
+      timeoutRef.current = setTimeout(() => {
+        setActive(false)
+        setPetals([])
+      }, 3200)
+    }
     const onKey = (e: KeyboardEvent) => {
       if (active) return
       keyBufRef.current = [...keyBufRef.current, e.key.toLowerCase()].slice(-6)
       if (keyBufRef.current.join("") === TRIGGER) {
         keyBufRef.current = []
-        setActive(true)
-        const newPetals: Petal[] = Array.from({ length: PETAL_COUNT }, (_, i) => ({
-          id: Date.now() + i,
-          x: Math.random() * 96 + 2,
-          drift: (Math.random() - 0.5) * 15,
-          delay: Math.random() * 0.5,
-          size: 16 + Math.random() * 20,
-          duration: 2.2 + Math.random() * 1.5,
-          emoji: EMOJIS[Math.floor(Math.random() * EMOJIS.length)],
-        }))
-        setPetals(newPetals)
-        timeoutRef.current = setTimeout(() => {
-          setActive(false)
-          setPetals([])
-        }, 3200)
+        trigger()
+      }
+    }
+    const onTouch = () => {
+      if (active) return
+      const now = Date.now()
+      tapTimestampsRef.current = [...tapTimestampsRef.current, now].filter(t => now - t < 800)
+      if (tapTimestampsRef.current.length >= 3) {
+        tapTimestampsRef.current = []
+        trigger()
       }
     }
     window.addEventListener("keydown", onKey)
+    document.addEventListener("touchstart", onTouch)
     return () => {
       window.removeEventListener("keydown", onKey)
+      document.removeEventListener("touchstart", onTouch)
       if (timeoutRef.current) clearTimeout(timeoutRef.current)
     }
   }, [active])

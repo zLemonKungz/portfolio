@@ -34,6 +34,8 @@ export default function CustomCursor() {
 
   useEffect(() => {
     setMounted(true)
+    const isTouch = window.matchMedia('(pointer: coarse)').matches
+    if (isTouch) { setMounted(false); return }
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
     setReduceMotion(mq.matches)
     const handler = (e: MediaQueryListEvent) => setReduceMotion(e.matches)

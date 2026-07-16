@@ -253,11 +253,11 @@ export default function Gallery() {
 
                   {/* Nav buttons — on image edges */}
                   <button onClick={() => navigateLightbox(-1)}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/70 hover:bg-white/90 backdrop-blur-md flex items-center justify-center text-muted/70 hover:text-dark shadow-sm transition-all border border-white/60">
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-12 h-12 sm:w-10 sm:h-10 rounded-full bg-white/70 hover:bg-white/90 backdrop-blur-md flex items-center justify-center text-muted/70 hover:text-dark shadow-sm transition-all border border-white/60">
                     <ChevronLeft size={20} />
                   </button>
                   <button onClick={() => navigateLightbox(1)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/70 hover:bg-white/90 backdrop-blur-md flex items-center justify-center text-muted/70 hover:text-dark shadow-sm transition-all border border-white/60">
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-12 h-12 sm:w-10 sm:h-10 rounded-full bg-white/70 hover:bg-white/90 backdrop-blur-md flex items-center justify-center text-muted/70 hover:text-dark shadow-sm transition-all border border-white/60">
                     <ChevronRight size={20} />
                   </button>
                 </div>
@@ -301,7 +301,7 @@ export default function Gallery() {
                         </a>
                       )}
                       <button onClick={() => setLightbox(null)}
-                        className="w-9 h-9 rounded-full flex items-center justify-center text-muted/40 hover:text-dark hover:bg-muted/10 transition-all">
+                        className="w-12 h-12 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-muted/40 hover:text-dark hover:bg-muted/10 transition-all">
                         <X size={18} />
                       </button>
                     </div>
